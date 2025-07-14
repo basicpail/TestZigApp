@@ -1,4 +1,5 @@
-﻿using DegaussingTestZigApp.Models;
+﻿using DegaussingTestZigApp.Helpers;
+using DegaussingTestZigApp.Models;
 using DegaussingTestZigApp.Services;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
@@ -10,18 +11,26 @@ namespace DegaussingTestZigApp.ViewModels.Pages
     {
         private readonly ModbusUDPService _modbusUDPService;
         private readonly ModbusRTUService _modbusRTUService;
+        private readonly ModbusLoopbackTest _modbusLoopbackTest;
+        private readonly ModbusRTURequest _modbusRequest;
 
         private const int MaxResponseCount = 5;
 
         public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
         public ObservableCollection<string> RTUResponseList { get; } = new ObservableCollection<string>();
 
-        public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService)
+        public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService, ModbusLoopbackTest modbusLoopbackTest, ModbusRTURequest modbusRTURequest)
         {
             _modbusUDPService = modbusUdpService;
             _modbusUDPService.UDPResponseSent += OnUDPResponseSent;
 
             _modbusRTUService = modbusRTUService;
+
+            _modbusLoopbackTest = modbusLoopbackTest;
+
+            _modbusRequest = modbusRTURequest;
+            _modbusRequest.RTUResponseSent += OnRTUResponseSent;
+
 
             // 5칸 미리 초기화
             for (int i = 0; i < MaxResponseCount; i++)
@@ -30,6 +39,8 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 RTUResponseList.Add(string.Empty);
             }
         }
+
+        
 
         [ObservableProperty]
         private string udpAddress = "127.0.0.1"; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
@@ -47,7 +58,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private string _lastResponseHex;
 
         [ObservableProperty]
-        private string rtuAddress = "COM3";
+        private string rtuAddress = "COM4";
 
         [ObservableProperty]
         private int baudRate = 9600;
@@ -105,6 +116,18 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             ModbusRTUstatusMessage = result ? "연결 종료됨" : "종료 실패";
         }
 
+        [RelayCommand]
+        private async Task ModbusLoopbackTest()
+        {
+            await _modbusLoopbackTest.StartAsync();
+        }
+
+        [RelayCommand]
+        private async Task ModbusRTURequest()
+        {
+            await _modbusRequest.StartAsync();
+        }
+
         private void OnUDPResponseSent(object? sender, byte[] response)
         {
             // 바이트 배열을 16진수 문자열로 변환하여 바인딩용 프로퍼티에 저장
@@ -130,7 +153,16 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                     UDPResponseList.RemoveAt(UDPResponseList.Count - 1);
             });
         }
-
+        private void OnRTUResponseSent(object? sender, ushort[] response)
+        {
+            var currentTime = GetKoreanFormattedTimestamp();
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                RTUResponseList.Insert(0, currentTime + "      " + response[0]); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
+                if (RTUResponseList.Count > MaxResponseCount)
+                    RTUResponseList.RemoveAt(RTUResponseList.Count - 1);
+            });
+        }
 
         private string ConvertHexStringToDecimalString(string hexString)
         {

@@ -389,6 +389,26 @@
           }
         }
       },
+      "NModbus/3.0.81": {
+        "runtime": {
+          "lib/net6.0/NModbus.dll": {
+            "assemblyVersion": "3.0.81.0",
+            "fileVersion": "3.0.81.0"
+          }
+        }
+      },
+      "NModbus.Serial/3.0.81": {
+        "dependencies": {
+          "NModbus": "3.0.81",
+          "System.IO.Ports": "9.0.7"
+        },
+        "runtime": {
+          "lib/net6.0/NModbus.Serial.dll": {
+            "assemblyVersion": "3.0.81.0",
+            "fileVersion": "3.0.81.0"
+          }
+        }
+      },
       "runtime.android-arm.runtime.native.System.IO.Ports/9.0.7": {
         "runtimeTargets": {
           "runtimes/android-arm/native/libSystem.IO.Ports.Native.so": {
@@ -906,6 +926,20 @@
       "sha512": "sha512-OxjcwJqBW/5A1111+vL9d+5KYTvOzeCTJY9zHZ0kpQI4wX075p6L7inHPSYuf0MGakVjUvaShvw9e9pfbInU2Q==",
       "path": "microsoft.win32.systemevents/9.0.1",
       "hashPath": "microsoft.win32.systemevents.9.0.1.nupkg.sha512"
+    },
+    "NModbus/3.0.81": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EzKEp7CHD8ErBL36iMts+6IrZZ9FEqllaD7Y5XzhoRjlxt5yXRughQ1bxPs99QFYFkW5xfkANB0Qs1gAmYGP8Q==",
+      "path": "nmodbus/3.0.81",
+      "hashPath": "nmodbus.3.0.81.nupkg.sha512"
+    },
+    "NModbus.Serial/3.0.81": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6IISxvysZRaPkUJr52SVLdXqQwtrGtRmOnMbmSsnvjQnTxAUif/NihNC7Zbi4dvzUTDtlg3H7reZIBkUAHupjg==",
+      "path": "nmodbus.serial/3.0.81",
+      "hashPath": "nmodbus.serial.3.0.81.nupkg.sha512"
     },
     "runtime.android-arm.runtime.native.System.IO.Ports/9.0.7": {
       "type": "package",

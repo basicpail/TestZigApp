@@ -66,10 +66,6 @@
               "target": "Package",
               "version": "[3.0.81, )"
             },
-            "NModbus4": {
-              "target": "Package",
-              "version": "[2.1.0, )"
-            },
             "System.IO.Ports": {
               "target": "Package",
               "version": "[9.0.7, )"

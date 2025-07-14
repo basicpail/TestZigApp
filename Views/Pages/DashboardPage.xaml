@@ -76,31 +76,31 @@
 
                                 <ui:Card Margin="0,0,0,0">
                                     <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[0]}" FontSize="18" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.UDPResponseList[0]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card >
                                     <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[1]}" FontSize="18" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.UDPResponseList[1]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[2]}" FontSize="18" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.UDPResponseList[2]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[3]}" FontSize="18" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.UDPResponseList[3]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[4]}" FontSize="18" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.UDPResponseList[4]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
                             </StackPanel>
@@ -127,42 +127,38 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                     <Button Content="Connect" Command="{Binding ViewModel.ModbusRTUConnectCommand}" Margin="0,0,10,0"/>
                                     <Button Content="Disconnect" Command="{Binding ViewModel.ModbusRTUDisconnectCommand}" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding ViewModel.ModbusRTUStatusMessage}" Foreground="Green" Margin="0,5,10,0"/>
+                                    <TextBlock Text="{Binding ViewModel.ModbusRTUstatusMessage}" Foreground="Green" Margin="0,5,10,0"/>
+                                    <Button Content="Request" Command="{Binding ViewModel.ModbusRTURequestCommand}" Margin="0,0,10,0"/>
                                 </StackPanel>
 
 
                                 <ui:Card Margin="0,0,0,0">
                                     <ui:TextBlock>
-                                        <Run Text="Data1" />
-                                        <Run Text="31,250" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.RTUResponseList[0]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card >
                                     <ui:TextBlock>
-                                        <Run Text="Data2" />
-                                        <Run Text="29,280" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.RTUResponseList[1]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="Data3" />
-                                        <Run Text="28,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.RTUResponseList[2]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="Data4" />
-                                        <Run Text="28,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.RTUResponseList[3]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
 
                                 <ui:Card>
                                     <ui:TextBlock>
-                                        <Run Text="Data5" />
-                                        <Run Text="28,775" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
+                                        <Run Text="{Binding ViewModel.RTUResponseList[4]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
                                     </ui:TextBlock>
                                 </ui:Card>
                             </StackPanel>

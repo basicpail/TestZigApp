@@ -1,15 +1,10 @@
 ﻿using DegaussingTestZigApp.Helpers;
 using DegaussingTestZigApp.Interfaces;
 using DegaussingTestZigApp.Models;
-using Modbus.Data;
 using NModbus;
 using NModbus.Data;
 using NModbus.Serial;
-using System;
-using System.Drawing.Printing;
 using System.IO.Ports;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DegaussingTestZigApp.Services
 {
@@ -20,6 +15,7 @@ namespace DegaussingTestZigApp.Services
         private CancellationTokenSource? _cts;
         private Task? _listenTask;
         private byte slaveID = 1;
+        private IModbusSerialMaster _master;
 
         public bool IsConnected { get; private set; } = false;
 
@@ -43,23 +39,25 @@ namespace DegaussingTestZigApp.Services
                 };
                 _serialPort.Open();
 
-
-                var factory = new ModbusFactory();
+                var logger = new CustomModbusLogger();
                 // 1. 데이터 저장소 생성 및 초기화
-                var dataStore = new DefaultSlaveDataStore();
+                var factory = new ModbusFactory();
                 var adapter = new SerialPortAdapter(_serialPort);
-                var slave = factory.CreateSlave(slaveID); // Port 필드를 Slave ID로 사용
-                
-                var rand = new Random();
+                //var dataStore = new DefaultSlaveDataStore();
+                var dataStore = new CustomSlaveDataStore(); //ReadHoldingRegister 할 때 마다 ReadPoints가 호출되어서 0~200 랜덤 값 들어간다.
+
+
                 // 125개의 값 생성 Holding Registers 0~124에 랜덤 값 채우기, 모든 레지스터에 값 넣어 놓기
+                var rand = new Random();
                 ushort[] values = new ushort[125];
                 for (int i = 0; i < 125; i++)
                     values[i] = (ushort)rand.Next(0, 201);
                 // 주소 0부터 시작하여 값 쓰기
+                //dataStore.HoldingRegisters.ReadPoints(1, 1)
                 dataStore.HoldingRegisters.WritePoints(0, values);
 
-
-
+                //Slave Network 만들고, Slave를 Network에 Add
+                var slave = factory.CreateSlave(slaveID, dataStore);
                 _slaveNetwork = factory.CreateRtuSlaveNetwork(adapter);
                 _slaveNetwork.AddSlave(slave);
 
@@ -67,7 +65,8 @@ namespace DegaussingTestZigApp.Services
                 _listenTask = Task.Run(() => ListenLoopAsync(_cts.Token));
 
                 IsConnected = true;
-                Log($"[RTU-Slave] Listening on {settings.Address} @ {settings.BaudRate}bps (SlaveId={settings.Port})");
+                Log($"[RTU-Slave] Listening on {settings.Address} @ {settings.BaudRate}bps (SlaveId={slaveID})");
+
                 return true;
             }
             catch (Exception ex)
@@ -115,6 +114,7 @@ namespace DegaussingTestZigApp.Services
                 {
                     await _slaveNetwork.ListenAsync(token);
                     //이벤트 삽입하여 viewmodel 로 데이터 전달
+                    Log($"[RTU-Slave] Request Received!");
                 }
             }
             catch (OperationCanceledException)

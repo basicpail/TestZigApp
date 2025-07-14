@@ -56,6 +56,8 @@ namespace DegaussingTestZigApp
                 //selfmade service
                 services.AddSingleton<ModbusUDPService>();
                 services.AddSingleton<ModbusRTUService>();
+                services.AddSingleton<ModbusLoopbackTest>();
+                services.AddSingleton<ModbusRTURequest>();
             }).Build();
 
         /// <summary>

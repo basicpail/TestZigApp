@@ -3,32 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\viewmodels\\pages\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:viewmodels\\pages\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\views\\pages\\dashboardpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:views\\pages\\dashboardpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\helpers\\customslavedatastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:helpers\\customslavedatastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\views\\pages\\dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:views\\pages\\dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\services\\modbusrtuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:services\\modbusrtuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\interfaces\\imodbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:interfaces\\imodbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\helpers\\loggingpointsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:helpers\\loggingpointsource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\viewmodels\\pages\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:viewmodels\\pages\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\services\\modbusrturequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:services\\modbusrturequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\services\\modbusudpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:services\\modbusudpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\models\\modbusrtusettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:models\\modbusrtusettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\services\\modbusloopbacktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:services\\modbusloopbacktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\helpers\\randomvaluedatastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:helpers\\randomvaluedatastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\interfaces\\imodbussettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:interfaces\\imodbussettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\helpers\\modbuscustomlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:helpers\\modbuscustomlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|c:\\users\\kte\\downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\wpf\uAC1C\uBC1C\\degaussingtestzigapp\\models\\modbusrtusettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E5F9D0-D372-4C45-A014-5A871BE48F05}|DegaussingTestZigApp.csproj|solutionrelative:models\\modbusrtusettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,8 +65,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 259,
-          "SelectedChildIndex": 7,
+          "DockedWidth": 561,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,99 +82,188 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAwDkAAAA6AAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "DashboardPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Views\\Pages\\DashboardPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Pages\\DashboardPage.xaml.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Views\\Pages\\DashboardPage.xaml.cs",
+              "RelativeToolTip": "Views\\Pages\\DashboardPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxAAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T03:31:32.257Z",
+              "WhenOpened": "2025-07-14T06:51:24.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\ViewModels\\Pages\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Pages\\DashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\ViewModels\\Pages\\DashboardViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Pages\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T02:14:08.877Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ModbusRTUSettings.cs",
-              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Models\\ModbusRTUSettings.cs",
-              "RelativeDocumentMoniker": "Models\\ModbusRTUSettings.cs",
-              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Models\\ModbusRTUSettings.cs",
-              "RelativeToolTip": "Models\\ModbusRTUSettings.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAA5AAAAAAAAAA==",
+              "Title": "ModbusRTUService.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTUService.cs",
+              "RelativeDocumentMoniker": "Services\\ModbusRTUService.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTUService.cs",
+              "RelativeToolTip": "Services\\ModbusRTUService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAmwBYAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T03:17:58.119Z",
+              "WhenOpened": "2025-07-11T02:26:09.101Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
+              "Title": "DashboardPage.xaml",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Views\\Pages\\DashboardPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Pages\\DashboardPage.xaml",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Views\\Pages\\DashboardPage.xaml",
+              "RelativeToolTip": "Views\\Pages\\DashboardPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-14T06:35:03.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ModbusUDPService.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusUDPService.cs",
+              "RelativeDocumentMoniker": "Services\\ModbusUDPService.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusUDPService.cs",
+              "RelativeToolTip": "Services\\ModbusUDPService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwCcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T06:26:31.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ModbusLoopbackTest.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusLoopbackTest.cs",
+              "RelativeDocumentMoniker": "Services\\ModbusLoopbackTest.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusLoopbackTest.cs",
+              "RelativeToolTip": "Services\\ModbusLoopbackTest.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAiwEQAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T02:36:30.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RandomValueDataStore.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\RandomValueDataStore.cs",
+              "RelativeDocumentMoniker": "Helpers\\RandomValueDataStore.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\RandomValueDataStore.cs",
+              "RelativeToolTip": "Helpers\\RandomValueDataStore.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T04:30:55.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "IModbusSettings.cs",
               "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Interfaces\\IModbusSettings.cs",
               "RelativeDocumentMoniker": "Interfaces\\IModbusSettings.cs",
               "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Interfaces\\IModbusSettings.cs",
               "RelativeToolTip": "Interfaces\\IModbusSettings.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBYAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAcwA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-11T02:33:03.779Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ModbusUDPService.cs",
-              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusUDPService.cs",
-              "RelativeDocumentMoniker": "Services\\ModbusUDPService.cs",
-              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusUDPService.cs",
-              "RelativeToolTip": "Services\\ModbusUDPService.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAArwFsAAAA8AAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "ModbusCustomLogger.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\ModbusCustomLogger.cs",
+              "RelativeDocumentMoniker": "Helpers\\ModbusCustomLogger.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\ModbusCustomLogger.cs",
+              "RelativeToolTip": "Helpers\\ModbusCustomLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T02:17:04.897Z",
+              "WhenOpened": "2025-07-14T03:58:54.92Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\ViewModels\\Pages\\DashboardViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\Pages\\DashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\ViewModels\\Pages\\DashboardViewModel.cs",
-              "RelativeToolTip": "ViewModels\\Pages\\DashboardViewModel.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAQwHUAAAATAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "ModbusRTUSettings.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Models\\ModbusRTUSettings.cs",
+              "RelativeDocumentMoniker": "Models\\ModbusRTUSettings.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Models\\ModbusRTUSettings.cs",
+              "RelativeToolTip": "Models\\ModbusRTUSettings.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T02:14:08.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T03:17:58.119Z"
             }
           ]
         },
         {
-          "DockedWidth": 526,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 103,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "CustomSlaveDataStore.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\CustomSlaveDataStore.cs",
+              "RelativeDocumentMoniker": "Helpers\\CustomSlaveDataStore.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\CustomSlaveDataStore.cs",
+              "RelativeToolTip": "Helpers\\CustomSlaveDataStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAowDIAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T01:32:57.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ModbusRTURequest.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTURequest.cs",
+              "RelativeDocumentMoniker": "Services\\ModbusRTURequest.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTURequest.cs",
+              "RelativeToolTip": "Services\\ModbusRTURequest.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAIwC0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T06:18:28.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IModbusService.cs",
+              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Interfaces\\IModbusService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IModbusService.cs",
+              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Interfaces\\IModbusService.cs",
+              "RelativeToolTip": "Interfaces\\IModbusService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAQwBEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T02:27:49.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "LoggingPointSource.cs",
               "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\LoggingPointSource.cs",
               "RelativeDocumentMoniker": "Helpers\\LoggingPointSource.cs",
               "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Helpers\\LoggingPointSource.cs",
               "RelativeToolTip": "Helpers\\LoggingPointSource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-11T06:57:15.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ModbusRTUService.cs",
-              "DocumentMoniker": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTUService.cs",
-              "RelativeDocumentMoniker": "Services\\ModbusRTUService.cs",
-              "ToolTip": "C:\\Users\\KTE\\Downloads\\\uC784\uC2DC\uD3F4\uB354\\\uC778\uC218\uC778\uACC4 \uC790\uB8CC\\\uC18C\uC790\uC81C\uC5B4\uAE30\\WPF\uAC1C\uBC1C\\DegaussingTestZigApp\\Services\\ModbusRTUService.cs*",
-              "RelativeToolTip": "Services\\ModbusRTUService.cs*",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADAAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T02:26:09.101Z",
               "EditorCaption": ""
             }
           ]

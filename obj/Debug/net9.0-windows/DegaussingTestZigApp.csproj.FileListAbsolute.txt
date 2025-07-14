@@ -206,4 +206,4 @@ C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개�
 C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개발\DegaussingTestZigApp\obj\Debug\net9.0-windows\ref\DegaussingTestZigApp.dll
 C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개발\DegaussingTestZigApp\bin\Debug\net9.0-windows\NModbus.dll
 C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개발\DegaussingTestZigApp\bin\Debug\net9.0-windows\NModbus.Serial.dll
-C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개발\DegaussingTestZigApp\bin\Debug\net9.0-windows\NModbus4.dll
+C:\Users\KTE\Downloads\임시폴더\인수인계 자료\소자제어기\WPF개발\DegaussingTestZigApp\obj\Debug\net9.0-windows\DegaussingTestZigApp.sourcelink.json
