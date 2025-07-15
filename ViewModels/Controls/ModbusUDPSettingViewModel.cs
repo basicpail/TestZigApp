@@ -10,10 +10,10 @@ namespace DegaussingTestZigApp.ViewModels.Controls
     {
 
         [ObservableProperty]
-        private string _address="192.168.10.1";
+        private string _address;
 
         [ObservableProperty]
-        private int _port=502;
+        private int _port;
 
     }
 }

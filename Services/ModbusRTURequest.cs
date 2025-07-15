@@ -1,4 +1,5 @@
 ﻿using DegaussingTestZigApp.Helpers;
+using DegaussingTestZigApp.Models;
 using NModbus;
 using NModbus.Serial;
 using System;
@@ -12,24 +13,29 @@ namespace DegaussingTestZigApp.Services
 {
     public class ModbusRTURequest
     {
-        private readonly string _comPortMaster = "COM5";
-        private SerialPort _serialPortMaster;
+        private SerialPort _serialPort;
         private IModbusSerialMaster _master;
         public event EventHandler<string>? LogReceived;
 
-        public async Task StartAsync()
+        public async Task StartAsync(ModbusRTUSettings settings)
         {
             try
             {
-                _serialPortMaster = new SerialPort(_comPortMaster, 9600, Parity.None, 8, StopBits.One)
+                _serialPort = new SerialPort(
+                    settings.Address,
+                    settings.BaudRate,
+                    settings.Parity,
+                    settings.DataBits,
+                    settings.StopBits
+                )
                 {
-                    ReadTimeout = 1000,
-                    WriteTimeout = 1000
+                    ReadTimeout = 500,
+                    WriteTimeout = 500
                 };
-                _serialPortMaster.Open();
+                _serialPort.Open();
 
                 var factory = new ModbusFactory();
-                var adapterMaster = new SerialPortAdapter(_serialPortMaster);
+                var adapterMaster = new SerialPortAdapter(_serialPort);
 
 
                 //Master 세팅
@@ -46,11 +52,11 @@ namespace DegaussingTestZigApp.Services
 
                 // Cleanup
                 await Task.Delay(100);
-                _serialPortMaster.Close();
+                _serialPort.Close();
             }
             catch (Exception ex)
             {
-                _serialPortMaster.Close();
+                _serialPort?.Close();
                 Log($"[Error] Failed to Request Modbus : {ex.Message}");
             }
         }

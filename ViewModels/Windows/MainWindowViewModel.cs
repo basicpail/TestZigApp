@@ -13,13 +13,13 @@ namespace DegaussingTestZigApp.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Menu1",
+                Content = "통신 모듈 테스트",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
             new NavigationViewItem()
             {
-                Content = "Menu2",
+                Content = "기타 테스트",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
             }

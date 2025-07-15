@@ -22,11 +22,13 @@ namespace DegaussingTestZigApp.Controls
     public partial class ModbusRTUSettingControl : UserControl
     {
         public ModbusRTUSettingViewModel ViewModel { get; }
+
         public ModbusRTUSettingControl(ModbusRTUSettingViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
+
         }
     }
 }

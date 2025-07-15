@@ -42,7 +42,7 @@
             <!-- Section title -->
             <Grid Grid.Row="1" Margin="0,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="● 통신 모듈 테스트" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15" />
+                    <!--<TextBlock Text="● 통신 모듈 테스트" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,15" />-->
                 </StackPanel>
             </Grid>
 
@@ -69,9 +69,11 @@
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                    <Button Content="Connect" Command="{Binding ViewModel.ModbusUDPConnectCommand}" Margin="0,0,10,0"/>
-                                    <Button Content="Disconnect" Command="{Binding ViewModel.ModbusUDPDisconnectCommand}" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding ViewModel.ModbusUDPstatusMessage}" Foreground="Green" Margin="0,5,10,0"/>
+                                    <ui:InfoBar Title="{Binding ViewModel.UdpInfoBarMessage}"
+                                       Severity="{Binding ViewModel.UdpInfoBarSeverity}"
+                                       IsOpen="{Binding ViewModel.IsInfoBarOpen}"
+                                       IsClosable="False"
+                                       Margin="0,0,0,10" />
                                 </StackPanel>
 
                                 <ui:Card Margin="0,0,0,0">
@@ -122,13 +124,20 @@
                                     <TextBlock Text="시리얼 통신 모듈 테스트" Foreground="White" FontSize="14" FontWeight="SemiBold"  Margin="0,5,0,0"/>
                                     <ui:Button Content="통신설정" Width="100" Height="30" Margin="20,0,0,0"
                                                Click="OpenModbusRtuSettingDialog" />
+                                    <Button Content="Request" Command="{Binding ViewModel.ModbusRTURequestCommand}" Margin="15,0,10,0"/>
                                 </StackPanel>
+                                
 
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                    <Button Content="Connect" Command="{Binding ViewModel.ModbusRTUConnectCommand}" Margin="0,0,10,0"/>
+                                    <ui:InfoBar Title="{Binding ViewModel.RtuInfoBarMessage}"
+                                       Severity="{Binding ViewModel.RtuInfoBarSeverity}"
+                                       IsOpen="{Binding ViewModel.IsInfoBarOpen}"
+                                       IsClosable="False"
+                                       Margin="0,0,0,10" />
+                                    <!--<Button Content="Connect" Command="{Binding ViewModel.ModbusRTUConnectCommand}" Margin="0,0,10,0"/>
                                     <Button Content="Disconnect" Command="{Binding ViewModel.ModbusRTUDisconnectCommand}" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding ViewModel.ModbusRTUstatusMessage}" Foreground="Green" Margin="0,5,10,0"/>
-                                    <Button Content="Request" Command="{Binding ViewModel.ModbusRTURequestCommand}" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding ViewModel.ModbusRTUstatusMessage}" Foreground="Green" Margin="0,5,10,0"/>-->
+                                    
                                 </StackPanel>
 
 

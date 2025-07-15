@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
+using DegaussingTestZigApp.Controls;
 using DegaussingTestZigApp.Helpers;
 using DegaussingTestZigApp.Services;
 using DegaussingTestZigApp.ViewModels.Pages;
@@ -56,6 +57,8 @@ namespace DegaussingTestZigApp
                 services.AddSingleton<SettingsViewModel>();
 
                 //selfmade service
+                services.AddSingleton<ModbusRTUSettingControl>();
+
                 services.AddSingleton<ModbusUDPService>();
                 services.AddSingleton<ModbusRTUService>();
                 services.AddSingleton<ModbusLoopbackTest>();

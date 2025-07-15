@@ -4,6 +4,7 @@ using DegaussingTestZigApp.Services;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Net;
+using Wpf.Ui.Controls;
 
 namespace DegaussingTestZigApp.ViewModels.Pages
 {
@@ -42,80 +43,47 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 RTUResponseList.Add(string.Empty);
             }
         }
+        private string rtuMaterAddress = "COM5"; //Request 버튼 눌려서 Master가 요청 보낼때 사용하는 Port
 
         [ObservableProperty]
-        private string udpAddress = "127.0.0.1"; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
+        private string udpAddress; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
 
         [ObservableProperty]
-        private int udpPort = 502;
-
-        [ObservableProperty]
-        private string modbusUDPstatusMessage = "대기중";
-
-        [ObservableProperty]
-        private string modbusRTUstatusMessage = "대기중";
+        private int udpPort;
 
         [ObservableProperty]
         private string _lastResponseHex;
 
         [ObservableProperty]
-        private string rtuAddress = "COM4";
+        private string rtuAddress;
 
         [ObservableProperty]
-        private int baudRate = 9600;
+        private int baudRate;
 
         [ObservableProperty]
-        private Parity parity = Parity.None;
+        private Parity parity;
 
         [ObservableProperty]
-        private int dataBits = 8;
+        private int dataBits;
 
         [ObservableProperty]
-        private StopBits stopBits = StopBits.One;
+        private StopBits stopBits;
 
+        [ObservableProperty]
+        private bool _isInfoBarOpen = true;
 
-        [RelayCommand]
-        private async Task ModbusUDPConnect()
-        {
-            var settings = new ModbusUDPSettings
-            {
-                Address = UdpAddress,
-                Port = UdpPort
-            };
+        [ObservableProperty]
+        private string _rtuInfoBarMessage = "ModbusRTU Waiting to connect";
 
-            bool result = await _modbusUDPService.ConnectAsync(settings);
-            ModbusUDPstatusMessage = result ? "연결 성공" : "연결 실패";
-        }
+        [ObservableProperty]
+        private InfoBarSeverity _rtuInfoBarSeverity = InfoBarSeverity.Informational;
 
-        [RelayCommand]
-        private async Task ModbusUDPDisconnect()
-        {
-            bool result = await _modbusUDPService.DisconnectAsync();
-            ModbusUDPstatusMessage = result ? "연결 종료됨" : "종료 실패";
-        }
+        [ObservableProperty]
+        private string _udpInfoBarMessage = "ModbusUDP Waiting to connect";
 
-        [RelayCommand]
-        private async Task ModbusRTUConnect()
-        {
-            var settings = new ModbusRTUSettings
-            {
-                Address = RtuAddress,
-                BaudRate = BaudRate,
-                Parity = Parity,
-                DataBits = DataBits,
-                StopBits = StopBits,
-            };
+        [ObservableProperty]
+        private InfoBarSeverity _udpInfoBarSeverity = InfoBarSeverity.Informational;
 
-            bool result = await _modbusRTUService.ConnectAsync(settings);
-            ModbusRTUstatusMessage = result ? "연결 성공" : "연결 실패";
-        }
-
-        [RelayCommand]
-        private async Task ModbusRTUDisconnect()
-        {
-            bool result = await _modbusRTUService.DisconnectAsync();
-            ModbusRTUstatusMessage = result ? "연결 종료됨" : "종료 실패";
-        }
 
         [RelayCommand]
         private async Task ModbusLoopbackTest()
@@ -126,7 +94,98 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         [RelayCommand]
         private async Task ModbusRTURequest()
         {
-            await _modbusRequest.StartAsync();
+            var settings = new ModbusRTUSettings
+            {
+                Address = rtuMaterAddress,
+                BaudRate = BaudRate,
+                Parity = Parity,
+                DataBits = DataBits,
+                StopBits = StopBits,
+            };
+            await _modbusRequest.StartAsync(settings);
+        }
+        public async Task ModbusUDPConnect()
+        {
+            try
+            {
+                var settings = new ModbusUDPSettings
+                {
+                    Address = UdpAddress,
+                    Port = UdpPort
+                };
+                bool result = await _modbusUDPService.ConnectAsync(settings);
+                SetUDPConnectionResult(true);
+            }
+            catch (Exception ex)
+            {
+                SetUDPConnectionResult(false, ex.Message);
+            }
+
+            
+        }
+        public async Task ModbusUDPDisconnect()
+        {
+            try
+            {
+                bool result = await _modbusUDPService.DisconnectAsync();
+                UdpInfoBarMessage = result ? "ModbusUDP Waiting to connect" : "ModbusUDP Disconnection failed";
+                UdpInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
+                IsInfoBarOpen = true;
+            }
+            catch (Exception ex)
+            {
+                SetUDPConnectionResult(false, ex.Message);
+            }
+        }
+
+        public async Task ModbusRTUConnect()
+        {
+            var settings = new ModbusRTUSettings
+            {
+                Address = RtuAddress,
+                BaudRate = BaudRate,
+                Parity = Parity,
+                DataBits = DataBits,
+                StopBits = StopBits,
+            };
+            try
+            {
+                bool result = await _modbusRTUService.ConnectAsync(settings);
+                SetRTUConnectionResult(true);
+            }
+            catch (Exception ex)
+            {
+                SetRTUConnectionResult(false, ex.Message);
+            }
+        }
+        public async Task ModbusRTUDisconnect()
+        {
+            try
+            {
+                bool result = await _modbusRTUService.DisconnectAsync();
+                RtuInfoBarMessage = result ? "Modbus RTU Waiting to connect" : "Modbus RTU Disconnection failed";
+                RtuInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
+                IsInfoBarOpen = true;
+
+            }
+            catch (Exception ex)
+            {
+                SetRTUConnectionResult(false, ex.Message);
+            }
+        }
+
+        public void SetRTUConnectionResult(bool success, string? message = null)
+        {
+            RtuInfoBarMessage = success ? "ModbusRTU Connected" : (message ?? "ModbusRTU Connection failed");
+            RtuInfoBarSeverity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error;
+            IsInfoBarOpen = true;
+        }
+
+        public void SetUDPConnectionResult(bool success, string? message = null)
+        {
+            UdpInfoBarMessage = success ? "ModbusUDP Connected" : (message ?? "ModbusUDP Connection failed");
+            UdpInfoBarSeverity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error;
+            IsInfoBarOpen = true;
         }
 
         private void OnUDPResponseSent(object? sender, byte[] response)

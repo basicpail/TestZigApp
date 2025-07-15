@@ -1,4 +1,5 @@
 ﻿using DegaussingTestZigApp.Controls;
+using DegaussingTestZigApp.Interfaces;
 using DegaussingTestZigApp.ViewModels.Controls;
 using DegaussingTestZigApp.ViewModels.Pages;
 using System.Windows.Controls;
@@ -14,9 +15,12 @@ namespace DegaussingTestZigApp.Views.Pages
     public partial class DashboardPage : INavigableView<DashboardViewModel>
     {
         private readonly IContentDialogService _dialogService = new ContentDialogService();
+        private readonly ModbusRTUSettingViewModel _modbusRTUSettingViewModel;
+        private readonly ModbusRTUSettingControl _modbusRTUSettingControl;
+        
+        private readonly ModbusUDPSettingViewModel _modbusUPDSettingViewModel;
+        private readonly ModbusUDPSettingControl _modbusUDPSettingControl;
         public DashboardViewModel ViewModel { get; }
-        public ModbusUDPSettingViewModel modbusUDPSettingViewModel { get; }
-        public ModbusRTUSettingViewModel modbusRTUSettingViewModel { get; }
 
 
         public DashboardPage(DashboardViewModel viewModel)
@@ -25,6 +29,13 @@ namespace DegaussingTestZigApp.Views.Pages
             ViewModel = viewModel;
             DataContext = this;
             Loaded += DashboardPage_Loaded;
+
+            _modbusUPDSettingViewModel = new ModbusUDPSettingViewModel();
+            _modbusUDPSettingControl = new ModbusUDPSettingControl(_modbusUPDSettingViewModel);
+
+            _modbusRTUSettingViewModel = new ModbusRTUSettingViewModel();
+            _modbusRTUSettingControl = new ModbusRTUSettingControl(_modbusRTUSettingViewModel);
+
             InitializeComponent();
 
         }
@@ -37,12 +48,12 @@ namespace DegaussingTestZigApp.Views.Pages
             // 오버레이 레이어 표시
             DialogOverlayHost.Visibility = Visibility.Visible;
 
-            var modbusUdpSettingControl = new ModbusUDPSettingControl(modbusUDPSettingViewModel);
             var dialog = new ContentDialog
             {
                 Title = "ModbusUDP 설정",
-                Content = modbusUdpSettingControl,
+                Content = _modbusUDPSettingControl,
                 PrimaryButtonText = "Connect",
+                SecondaryButtonText = "Disconnect",
                 CloseButtonText = "Close",
                 Effect = null,
             };
@@ -52,8 +63,14 @@ namespace DegaussingTestZigApp.Views.Pages
 
             if (result == ContentDialogResult.Primary)
             {
-               
-                // Handle "Yes" button click
+                var settingVm = _modbusUDPSettingControl;
+                ViewModel.UdpAddress = settingVm.ViewModel.Address;
+                ViewModel.UdpPort = settingVm.ViewModel.Port;
+                await ViewModel.ModbusUDPConnect(); 
+            }
+            else if (result == ContentDialogResult.Secondary)
+            {
+                await ViewModel.ModbusUDPDisconnect();
             }
             else
             {
@@ -65,13 +82,14 @@ namespace DegaussingTestZigApp.Views.Pages
         {
             // 오버레이 레이어 표시
             DialogOverlayHost.Visibility = Visibility.Visible;
-            var modbusRtuSettingControl = new ModbusRTUSettingControl(modbusRTUSettingViewModel);
+            //var modbusRtuSettingControl = new ModbusRTUSettingControl(modbusRTUSettingViewModel); 
 
             var dialog = new ContentDialog
             {
                 Title = "ModbusRTU 설정",
-                Content = modbusRtuSettingControl,
+                Content = _modbusRTUSettingControl,
                 PrimaryButtonText = "Connect",
+                SecondaryButtonText = "Disconnect",
                 CloseButtonText = "Close",
                 Effect = null,
             };
@@ -80,7 +98,19 @@ namespace DegaussingTestZigApp.Views.Pages
 
             if (result == ContentDialogResult.Primary)
             {
-                // Handle "Yes" button click
+                // Handle "Connect" button click
+                var settingVm = _modbusRTUSettingControl;
+                ViewModel.RtuAddress = settingVm.ViewModel.ComPort;
+                ViewModel.BaudRate = settingVm.ViewModel.Baudrate;
+                ViewModel.Parity = settingVm.ViewModel.Parity;
+                ViewModel.DataBits = settingVm.ViewModel.Databit;
+                ViewModel.StopBits = settingVm.ViewModel.StopBits;
+                await ViewModel.ModbusRTUConnect();
+
+            }// Handle "Disconnect" button click
+            else if (result == ContentDialogResult.Secondary)
+            {
+                await ViewModel.ModbusRTUDisconnect();
             }
             else
             {
