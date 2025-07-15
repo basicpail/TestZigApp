@@ -34,7 +34,7 @@
                 <ui:Card Background="DarkSlateGray" Margin="0,0,0,15">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                         <ui:SymbolIcon Symbol="Info28" FontSize="18" FontWeight="Bold" Margin="0,0,5,0" />
-                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="테스트를 위한 임시 배포" />
+                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Text="장비 연결 및 응답 상태 실시간 모니터링 대시보드" />
                     </StackPanel>
                 </ui:Card>
             </Grid>
@@ -63,48 +63,85 @@
                         <ui:Card>
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
-                                    <TextBlock Text="이더넷 통신 모듈 테스트" Foreground="White" FontSize="14" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                    <TextBlock Text="이더넷 통신 모듈 테스트" FontSize="14" FontWeight="SemiBold" />
                                     <ui:Button Content="통신설정" Width="100" Height="30" Margin="20,0,0,0"
-                                               Click="OpenModbusUdpSettingDialog" />
+                                        Click="OpenModbusUdpSettingDialog" />
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                    <ui:InfoBar Title="{Binding ViewModel.UdpInfoBarMessage}"
-                                       Severity="{Binding ViewModel.UdpInfoBarSeverity}"
-                                       IsOpen="{Binding ViewModel.IsInfoBarOpen}"
-                                       IsClosable="False"
-                                       Margin="0,0,0,10" />
-                                </StackPanel>
+                                <ui:InfoBar Title="{Binding ViewModel.UdpInfoBarMessage}"
+                                    Severity="{Binding ViewModel.UdpInfoBarSeverity}"
+                                    IsOpen="{Binding ViewModel.IsInfoBarOpen}"
+                                    IsClosable="False"
+                                    Margin="0,0,0,10" />
 
-                                <ui:Card Margin="0,0,0,0">
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[0]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                <!-- 테이블 헤더 -->
+                                <Border Background="#22111111"
+                                    Padding="10"
+                                    CornerRadius="3"
+                                    SnapsToDevicePixels="True"
+                                    BorderBrush="#22111111"
+                                    BorderThickness="0,0,0,1">
 
-                                <ui:Card >
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[1]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                            <TextBlock Text="No"
+                                                Grid.Column="0"
+                                                FontWeight="SemiBold"
+                                                FontSize="14"
+                                                Foreground="#EEEEEE"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="10,0,0,0"/>
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[2]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                             <TextBlock Text="응답 시간"
+                                                Grid.Column="1"
+                                                FontWeight="SemiBold"
+                                                FontSize="14"
+                                                Foreground="#EEEEEE"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="10,0,0,0"/>
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[3]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                            <TextBlock Text="응답 데이터"
+                                               Grid.Column="2"
+                                               FontWeight="SemiBold"
+                                               FontSize="14"
+                                               Foreground="#EEEEEE"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.UDPResponseList[4]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                <!-- 데이터 리스트 -->
+                                <ItemsControl ItemsSource="{Binding ViewModel.UDPResponseList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="6" Padding="10" Margin="0,5" Background="#22111111">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*" />
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="0" FontSize="18" HorizontalAlignment="Center">
+                                                        <Run Text="{Binding ResponseNum}" />
+                                                    </TextBlock>
+                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="1" FontSize="18" HorizontalAlignment="Center">
+                                                        <Run Text="{Binding Timestamp}" />
+                                                    </TextBlock>
+                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="2" FontSize="18" HorizontalAlignment="Center">
+                                                        <Run Text="{Binding Value}" />
+                                                    </TextBlock>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ui:Card>
                     </Grid>
@@ -126,50 +163,79 @@
                                                Click="OpenModbusRtuSettingDialog" />
                                     <Button Content="Request" Command="{Binding ViewModel.ModbusRTURequestCommand}" Margin="15,0,10,0"/>
                                 </StackPanel>
-                                
-
-                                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                    <ui:InfoBar Title="{Binding ViewModel.RtuInfoBarMessage}"
-                                       Severity="{Binding ViewModel.RtuInfoBarSeverity}"
-                                       IsOpen="{Binding ViewModel.IsInfoBarOpen}"
-                                       IsClosable="False"
-                                       Margin="0,0,0,10" />
-                                    <!--<Button Content="Connect" Command="{Binding ViewModel.ModbusRTUConnectCommand}" Margin="0,0,10,0"/>
-                                    <Button Content="Disconnect" Command="{Binding ViewModel.ModbusRTUDisconnectCommand}" Margin="0,0,10,0"/>
-                                    <TextBlock Text="{Binding ViewModel.ModbusRTUstatusMessage}" Foreground="Green" Margin="0,5,10,0"/>-->
-                                    
-                                </StackPanel>
 
 
-                                <ui:Card Margin="0,0,0,0">
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.RTUResponseList[0]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                <ui:InfoBar Title="{Binding ViewModel.RtuInfoBarMessage}"
+                                    Severity="{Binding ViewModel.RtuInfoBarSeverity}"
+                                    IsOpen="{Binding ViewModel.IsInfoBarOpen}"
+                                    IsClosable="False"
+                                    Margin="0,0,0,10" />
 
-                                <ui:Card >
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.RTUResponseList[1]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.RTUResponseList[2]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                <!-- 테이블 헤더 -->
+                                <Border Background="#22111111"
+                                    Padding="10"
+                                    CornerRadius="3"
+                                    SnapsToDevicePixels="True"
+                                    BorderBrush="#22111111"
+                                    BorderThickness="0,0,0,1">
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.RTUResponseList[3]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
 
-                                <ui:Card>
-                                    <ui:TextBlock>
-                                        <Run Text="{Binding ViewModel.RTUResponseList[4]}" FontSize="20" FontWeight="Bold" Foreground="IndianRed" />
-                                    </ui:TextBlock>
-                                </ui:Card>
+                                        <TextBlock Text="No"
+                                            Grid.Column="0"
+                                            FontWeight="SemiBold"
+                                            FontSize="14"
+                                            Foreground="#EEEEEE"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Margin="10,0,0,0"/>
+
+                                        <TextBlock Text="응답 시간"
+                                            Grid.Column="1"
+                                            FontWeight="SemiBold"
+                                            FontSize="14"
+                                            Foreground="#EEEEEE"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Margin="10,0,0,0"/>
+
+                                        <TextBlock Text="응답 데이터"
+                                           Grid.Column="2"
+                                           FontWeight="SemiBold"
+                                           FontSize="14"
+                                           Foreground="#EEEEEE"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
+
+
+
+                                <ItemsControl ItemsSource="{Binding ViewModel.RTUResponseList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="6" Padding="10" Margin="0,5" Background="#22111111">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*" />
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="1*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding ResponseNum}" Foreground="IndianRed" FontWeight="Bold" Grid.Column="0" FontSize="18" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Timestamp}" Foreground="IndianRed" FontWeight="Bold" Grid.Column="1" FontSize="18" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Value}" Foreground="IndianRed" FontWeight="Bold" Grid.Column="2" FontSize="18" HorizontalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ui:Card>
                     </Grid>
@@ -182,7 +248,7 @@
             Panel.ZIndex="999"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
-                <ContentPresenter x:Name="RootContentDialogPresenter"          
+            <ContentPresenter x:Name="RootContentDialogPresenter"          
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                      />

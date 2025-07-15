@@ -16,10 +16,15 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private readonly ModbusRTURequest _modbusRequest;
         private readonly RandomHoldingRegisterSource _randomHoldingRegisterSource;
 
-        private const int MaxResponseCount = 5;
+        private const int MaxResponseCount = 15;
 
-        public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
-        public ObservableCollection<string> RTUResponseList { get; } = new ObservableCollection<string>();
+        //public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
+        public ObservableCollection<ResponseItem> UDPResponseList { get; } = new();
+        [ObservableProperty]
+        private int _udpResponseNum = 0;
+        public ObservableCollection<ResponseItem> RTUResponseList { get; } = new();
+        [ObservableProperty]
+        private int _rtuResponseNum = 0;
 
         public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService, ModbusLoopbackTest modbusLoopbackTest, ModbusRTURequest modbusRTURequest, RandomHoldingRegisterSource randomHoldingRegisterSource)
         {
@@ -37,11 +42,11 @@ namespace DegaussingTestZigApp.ViewModels.Pages
 
 
             // 5칸 미리 초기화
-            for (int i = 0; i < MaxResponseCount; i++)
-            {
-                UDPResponseList.Add(string.Empty);
-                RTUResponseList.Add(string.Empty);
-            }
+            //for (int i = 0; i < MaxResponseCount; i++)
+            //{
+            //    UDPResponseList.Add(string.Empty);
+            //    RTUResponseList.Add(string.Empty);
+            //}
         }
         private string rtuMaterAddress = "COM5"; //Request 버튼 눌려서 Master가 요청 보낼때 사용하는 Port
 
@@ -131,6 +136,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 UdpInfoBarMessage = result ? "ModbusUDP Waiting to connect" : "ModbusUDP Disconnection failed";
                 UdpInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
                 IsInfoBarOpen = true;
+                UdpResponseNum = 0;
             }
             catch (Exception ex)
             {
@@ -163,9 +169,11 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             try
             {
                 bool result = await _modbusRTUService.DisconnectAsync();
-                RtuInfoBarMessage = result ? "Modbus RTU Waiting to connect" : "Modbus RTU Disconnection failed";
+                RtuInfoBarMessage = result ? "ModbusRTU Waiting to connect" : "ModbusRTU Disconnection failed";
                 RtuInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
                 IsInfoBarOpen = true;
+                RtuResponseNum = 0;
+
 
             }
             catch (Exception ex)
@@ -208,7 +216,14 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 //ResponseList.Insert(0, LastResponseHex);
 
                 //ResponseList.Insert(0, decimalValues);
-                UDPResponseList.Insert(0, currentTime + "      " + decimalValues);
+                //UDPResponseList.Insert(0, currentTime + "      " + decimalValues);
+                
+                UDPResponseList.Insert(0, new ResponseItem
+                {
+                    ResponseNum = ++UdpResponseNum,
+                    Timestamp = currentTime,
+                    Value = decimalValues
+                });
                 if (UDPResponseList.Count > MaxResponseCount)
                     UDPResponseList.RemoveAt(UDPResponseList.Count - 1);
             });
@@ -219,7 +234,13 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             var currentTime = GetKoreanFormattedTimestamp();
             App.Current.Dispatcher.Invoke(() =>
             {
-                RTUResponseList.Insert(0, currentTime + "      " + response[0]); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
+                //RTUResponseList.Insert(0, currentTime + "      " + response[0]); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
+                RTUResponseList.Insert(0, new ResponseItem
+                {
+                    ResponseNum = ++RtuResponseNum,
+                    Timestamp = currentTime,
+                    Value = response[0].ToString()
+                }); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
                 if (RTUResponseList.Count > MaxResponseCount)
                     RTUResponseList.RemoveAt(RTUResponseList.Count - 1);
             });
