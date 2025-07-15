@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
+using DegaussingTestZigApp.Helpers;
 using DegaussingTestZigApp.Services;
 using DegaussingTestZigApp.ViewModels.Pages;
 using DegaussingTestZigApp.ViewModels.Windows;
@@ -46,6 +47,7 @@ namespace DegaussingTestZigApp
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
 
+                //
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<DataPage>();
@@ -58,6 +60,8 @@ namespace DegaussingTestZigApp
                 services.AddSingleton<ModbusRTUService>();
                 services.AddSingleton<ModbusLoopbackTest>();
                 services.AddSingleton<ModbusRTURequest>();
+                services.AddSingleton<RandomHoldingRegisterSource>();
+                services.AddSingleton<CustomSlaveDataStoreService>();
             }).Build();
 
         /// <summary>

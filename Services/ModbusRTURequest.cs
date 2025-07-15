@@ -15,7 +15,6 @@ namespace DegaussingTestZigApp.Services
         private readonly string _comPortMaster = "COM5";
         private SerialPort _serialPortMaster;
         private IModbusSerialMaster _master;
-        public event EventHandler<ushort[]>? RTUResponseSent;
         public event EventHandler<string>? LogReceived;
 
         public async Task StartAsync()
@@ -43,8 +42,6 @@ namespace DegaussingTestZigApp.Services
                 //// 4. Master → Slave 읽기
                 //Console.WriteLine("Master: ReadHoldingRegisters from address 100");
                 ushort[] result = await _master.ReadHoldingRegistersAsync(1, 100, 1);
-                RTUResponseSent?.Invoke(this, result); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
-                                                       //Console.WriteLine($"Read value: {result[0]}");
 
 
                 // Cleanup

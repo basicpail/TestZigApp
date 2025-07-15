@@ -31,10 +31,11 @@ namespace DegaussingTestZigApp.Services
             var factory = new ModbusFactory();
             var adapter = new SerialPortAdapter(_serialPort);
             var adapterMaster = new SerialPortAdapter(_serialPortMaster);
+            var randomSource = new RandomHoldingRegisterSource();
 
             //Slave 세팅
             //var dataStore = new DefaultSlaveDataStore();
-            var dataStore = new CustomSlaveDataStore();
+            var dataStore = new CustomSlaveDataStoreService(randomSource);
             var slave = factory.CreateSlave(1, dataStore);
             _slaveNetwork = factory.CreateRtuSlaveNetwork(adapter);
             _slaveNetwork.AddSlave(slave);

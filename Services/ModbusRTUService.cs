@@ -22,6 +22,12 @@ namespace DegaussingTestZigApp.Services
         public event EventHandler<string>? LogReceived;
         public event EventHandler<byte[]>? RTUResponseSent;
 
+        private readonly CustomSlaveDataStoreService _dataStore;
+
+        public ModbusRTUService(CustomSlaveDataStoreService dataStore)
+        {
+            _dataStore = dataStore;
+        }
         public async Task<bool> ConnectAsync(ModbusRTUSettings settings)
         {
             try
@@ -43,8 +49,10 @@ namespace DegaussingTestZigApp.Services
                 // 1. 데이터 저장소 생성 및 초기화
                 var factory = new ModbusFactory();
                 var adapter = new SerialPortAdapter(_serialPort);
+                var randomSource = new RandomHoldingRegisterSource();
                 //var dataStore = new DefaultSlaveDataStore();
-                var dataStore = new CustomSlaveDataStore(); //ReadHoldingRegister 할 때 마다 ReadPoints가 호출되어서 0~200 랜덤 값 들어간다.
+                //var dataStore = new CustomSlaveDataStoreService(randomSource); //ReadHoldingRegister 할 때 마다 ReadPoints가 호출되어서 0~200 랜덤 값 들어간다.
+                var dataStore = _dataStore; //ReadHoldingRegister 할 때 마다 ReadPoints가 호출되어서 0~200 랜덤 값 들어간다.
 
 
                 // 125개의 값 생성 Holding Registers 0~124에 랜덤 값 채우기, 모든 레지스터에 값 넣어 놓기

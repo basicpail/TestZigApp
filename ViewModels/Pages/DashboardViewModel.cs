@@ -13,13 +13,14 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private readonly ModbusRTUService _modbusRTUService;
         private readonly ModbusLoopbackTest _modbusLoopbackTest;
         private readonly ModbusRTURequest _modbusRequest;
+        private readonly RandomHoldingRegisterSource _randomHoldingRegisterSource;
 
         private const int MaxResponseCount = 5;
 
         public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
         public ObservableCollection<string> RTUResponseList { get; } = new ObservableCollection<string>();
 
-        public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService, ModbusLoopbackTest modbusLoopbackTest, ModbusRTURequest modbusRTURequest)
+        public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService, ModbusLoopbackTest modbusLoopbackTest, ModbusRTURequest modbusRTURequest, RandomHoldingRegisterSource randomHoldingRegisterSource)
         {
             _modbusUDPService = modbusUdpService;
             _modbusUDPService.UDPResponseSent += OnUDPResponseSent;
@@ -29,7 +30,9 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             _modbusLoopbackTest = modbusLoopbackTest;
 
             _modbusRequest = modbusRTURequest;
-            _modbusRequest.RTUResponseSent += OnRTUResponseSent;
+
+            _randomHoldingRegisterSource = randomHoldingRegisterSource;
+            _randomHoldingRegisterSource.RandomDataList += OnRandomHoldingRegisterSource;
 
 
             // 5칸 미리 초기화
@@ -39,8 +42,6 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 RTUResponseList.Add(string.Empty);
             }
         }
-
-        
 
         [ObservableProperty]
         private string udpAddress = "127.0.0.1"; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
@@ -153,7 +154,8 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                     UDPResponseList.RemoveAt(UDPResponseList.Count - 1);
             });
         }
-        private void OnRTUResponseSent(object? sender, ushort[] response)
+
+        private void OnRandomHoldingRegisterSource(object? sender, ushort[] response)
         {
             var currentTime = GetKoreanFormattedTimestamp();
             App.Current.Dispatcher.Invoke(() =>
