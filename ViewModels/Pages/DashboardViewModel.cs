@@ -19,9 +19,9 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private const int MaxResponseCount = 10;
 
         //public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
-        public ObservableCollection<ResponseItem> UDPResponseList { get; } = new();
+        public ObservableCollection<ResponseItem> UDPRequestList { get; } = new();
         [ObservableProperty]
-        private int _udpResponseNum = 0;
+        private int _udpRequestNum = 0;
         public ObservableCollection<ResponseItem> RTUResponseList { get; } = new();
         [ObservableProperty]
         private int _rtuResponseNum = 0;
@@ -29,7 +29,8 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         public DashboardViewModel(ModbusUDPService modbusUdpService, ModbusRTUService modbusRTUService, ModbusLoopbackTest modbusLoopbackTest, ModbusRTURequest modbusRTURequest, RandomHoldingRegisterSource randomHoldingRegisterSource)
         {
             _modbusUDPService = modbusUdpService;
-            _modbusUDPService.UDPResponseSent += OnUDPResponseSent;
+            _modbusUDPService.UDPRequestSent += OnUDPRequestSent;
+            _modbusUDPService.DispatchCommStatus += OnDispatchCommStatus;
 
             _modbusRTUService = modbusRTUService;
 
@@ -41,16 +42,23 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             _randomHoldingRegisterSource.RandomDataList += OnRandomHoldingRegisterSource;
 
         }
+
+        
+
         private string rtuMaterAddress = "COM5"; //Request 버튼 눌려서 Master가 요청 보낼때 사용하는 Port
 
         [ObservableProperty]
-        private string udpAddress; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
+        private string _udpAddress; //ObservableProperty 설정이 우선순위, 아니면 Model의 기본값으로 settings 들어간다. 나중에 사용자 입력받아서 여기로 넣으면 된다.
 
         [ObservableProperty]
-        private int udpPort;
+        private int _udpPort;
 
         [ObservableProperty]
-        private string _lastResponseHex;
+        private int _udpTimeOut=1000;
+
+
+        [ObservableProperty]
+        private string _lastRequestHex;
 
         [ObservableProperty]
         private string rtuAddress;
@@ -113,14 +121,24 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 };
                 bool result = await _modbusUDPService.ConnectAsync(settings);
                 SetUDPConnectionResult(true);
+                if (result)
+                {
+                    try
+                    {
+                        _modbusUDPService.StartSendingLoop(UdpTimeOut); // 연결 성공 시 주기적 전송 시작
+                    }
+                    catch (Exception ex)
+                    {
+                        SetUDPConnectionResult(false, ex.Message);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 SetUDPConnectionResult(false, ex.Message);
             }
-
-            
         }
+
         public async Task ModbusUDPDisconnect()
         {
             try
@@ -129,11 +147,36 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 UdpInfoBarMessage = result ? "ModbusUDP Waiting to connect" : "ModbusUDP Disconnection failed";
                 UdpInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
                 IsInfoBarOpen = true;
-                UdpResponseNum = 0;
+                UdpRequestNum = 0;
             }
             catch (Exception ex)
             {
                 SetUDPConnectionResult(false, ex.Message);
+            }
+        }
+
+        private void OnDispatchCommStatus(object? sender, CommStatusEventArgs e)
+        {
+            switch (e.StatusType)
+            {
+                case CommStatusType.Success:
+                    UdpInfoBarMessage = "ModbusUDP Connected";
+                    UdpInfoBarSeverity = InfoBarSeverity.Success;
+                    IsInfoBarOpen = true;
+                    SetUDPConnectionResult(true, e.Message);
+                    break;
+                case CommStatusType.Warning:
+                    UdpInfoBarMessage = e.Message;
+                    UdpInfoBarSeverity = InfoBarSeverity.Warning;
+                    IsInfoBarOpen = true;
+                    break;
+                case CommStatusType.Error:
+                    UdpInfoBarMessage = e.Message;
+                    UdpInfoBarSeverity = InfoBarSeverity.Error;
+                    IsInfoBarOpen = true;
+                    break;
+                case CommStatusType.Info:
+                    break;
             }
         }
 
@@ -189,16 +232,16 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             IsInfoBarOpen = true;
         }
 
-        private void OnUDPResponseSent(object? sender, byte[] response)
+        private void OnUDPRequestSent(object? sender, byte[] response)
         {
             // 바이트 배열을 16진수 문자열로 변환하여 바인딩용 프로퍼티에 저장
-            LastResponseHex = BitConverter.ToString(response).Replace("-", " ");
+            LastRequestHex = BitConverter.ToString(response).Replace("-", " ");
             //var decimalValues = string.Join(" ",LastResponseHex.Select(b => b.ToString()).ToList());
             //var decimalValues = string.Join(" ", LastResponseHex.Select(b => b.ToString()));
 
-            var hexParts = LastResponseHex.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var hexParts = LastRequestHex.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             // 각 부분을 10진수로 파싱하여 문자열 변환
-            var decimalValues = ConvertHexStringToDecimalString(LastResponseHex);
+            var decimalValues = ConvertHexStringToDecimalString(LastRequestHex);
             var currentTime = GetKoreanFormattedTimestamp();
 
             App.Current.Dispatcher.Invoke(() =>
@@ -211,14 +254,14 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 //ResponseList.Insert(0, decimalValues);
                 //UDPResponseList.Insert(0, currentTime + "      " + decimalValues);
                 
-                UDPResponseList.Insert(0, new ResponseItem
+                UDPRequestList.Insert(0, new ResponseItem
                 {
-                    ResponseNum = ++UdpResponseNum,
+                    ResponseNum = ++UdpRequestNum,
                     Timestamp = currentTime,
                     Value = decimalValues
                 });
-                if (UDPResponseList.Count > MaxResponseCount)
-                    UDPResponseList.RemoveAt(UDPResponseList.Count - 1);
+                if (UDPRequestList.Count > MaxResponseCount)
+                    UDPRequestList.RemoveAt(UDPRequestList.Count - 1);
             });
         }
 
