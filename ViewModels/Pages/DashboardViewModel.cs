@@ -16,7 +16,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private readonly ModbusRTURequest _modbusRequest;
         private readonly RandomHoldingRegisterSource _randomHoldingRegisterSource;
 
-        private const int MaxResponseCount = 15;
+        private const int MaxResponseCount = 10;
 
         //public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
         public ObservableCollection<ResponseItem> UDPResponseList { get; } = new();
@@ -40,13 +40,6 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             _randomHoldingRegisterSource = randomHoldingRegisterSource;
             _randomHoldingRegisterSource.RandomDataList += OnRandomHoldingRegisterSource;
 
-
-            // 5칸 미리 초기화
-            //for (int i = 0; i < MaxResponseCount; i++)
-            //{
-            //    UDPResponseList.Add(string.Empty);
-            //    RTUResponseList.Add(string.Empty);
-            //}
         }
         private string rtuMaterAddress = "COM5"; //Request 버튼 눌려서 Master가 요청 보낼때 사용하는 Port
 

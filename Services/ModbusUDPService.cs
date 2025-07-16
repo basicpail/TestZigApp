@@ -1,6 +1,7 @@
 ﻿using DegaussingTestZigApp.Interfaces;
 using DegaussingTestZigApp.Models;
 using System;
+using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection.Metadata;
@@ -13,6 +14,7 @@ namespace DegaussingTestZigApp.Services
     {
         private UdpClient? _udpClient;
         private IPEndPoint? _localEndPoint;
+        private IPEndPoint? _udplEndPoint;
         private CancellationTokenSource? _cts;
 
         public bool IsConnected { get; private set; } = false;
@@ -24,9 +26,26 @@ namespace DegaussingTestZigApp.Services
         {
             try
             {
-                //IPAddress bindAddress = IPAddress.Parse(settings.Address); //특정 주소 지정하고 싶을 때
-                _localEndPoint = new IPEndPoint(IPAddress.Any, settings.Port); // 0.0.0.0으로 지정해서 모든 네트워크 인터페이스에서 수신 대기
-                _udpClient = new UdpClient(_localEndPoint);
+                // 기존 UdpClient가 있으면 닫고 정리
+                if (_udpClient != null)
+                {
+                    _udpClient.Close(); // 내부적으로 Dispose도 수행
+                    _udpClient = null;
+                    Log("[UDP-Slave] 기존 UdpClient를 닫았습니다.");
+                }
+
+                if (_cts != null)
+                {
+                    _cts.Cancel();
+                    _cts.Dispose();
+                    _cts = null;
+                }
+
+                IPAddress bindAddress = IPAddress.Parse(settings.Address); //특정 주소 지정하고 싶을 때
+                _udplEndPoint = new IPEndPoint(bindAddress, settings.Port);//특정 주소 지정하고 싶을 때
+                //_localEndPoint = new IPEndPoint(IPAddress.Any, settings.Port); // 0.0.0.0으로 지정해서 모든 네트워크 인터페이스에서 수신 대기
+                //_udpClient = new UdpClient(_localEndPoint);
+                _udpClient = new UdpClient(_udplEndPoint);
                 _cts = new CancellationTokenSource();
                 IsConnected = true;
 
@@ -39,7 +58,8 @@ namespace DegaussingTestZigApp.Services
             {
                 Log($"[Error] Failed to bind UDP port: {ex.Message}");
                 IsConnected = false;
-                return false;
+                //return false;
+                throw ex;
             }
         }
 

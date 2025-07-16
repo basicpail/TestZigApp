@@ -32,6 +32,18 @@ namespace DegaussingTestZigApp.Services
         {
             try
             {
+                // 기존 포트가 열려 있다면 닫고 정리
+                if (_serialPort != null)
+                {
+                    if (_serialPort.IsOpen)
+                    {
+                        _serialPort.Close();
+                        Log("[RTU-Slave] 기존 SerialPort를 닫았습니다.");
+                    }
+                    _serialPort.Dispose();
+                    _serialPort = null;
+                }
+
                 _serialPort = new SerialPort(
                     settings.Address,
                     settings.BaudRate,
@@ -80,7 +92,8 @@ namespace DegaussingTestZigApp.Services
             catch (Exception ex)
             {
                 Log($"[Error] Serial open failed: {ex.Message}");
-                return false;
+                //return false;
+                throw ex;
             }
         }
 
@@ -91,13 +104,15 @@ namespace DegaussingTestZigApp.Services
                 _cts?.Cancel();
                 _listenTask?.Wait(1000);
                 _serialPort?.Close();
+                _serialPort?.Dispose();
                 IsConnected = false;
                 Log("[RTU-Slave] Disconnected.");
                 return Task.FromResult(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return Task.FromResult(false);
+                throw ex;
+                //return Task.FromResult(false);
             }
         }
 
