@@ -1,4 +1,5 @@
-﻿using NModbus;
+﻿using DegaussingTestZigApp.Helpers;
+using NModbus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace DegaussingTestZigApp.Services
     {
         private readonly Random _random = new();
         public event EventHandler<ushort[]>? RandomDataList;
+        public event EventHandler<CommStatusEventArgs>? DispatchCommStatus;
 
 
         //ReadHoldingRegister 할 때 마다 ReadPoints가 호출되어서 DataStore 값이 초기화 된다.
@@ -22,6 +24,7 @@ namespace DegaussingTestZigApp.Services
                 values[i] = (ushort)_random.Next(0, 201); // 0~200
             }
             RandomDataList?.Invoke(this, values);//DashvoardViewModel로 값 전달
+            DispatchCommStatus?.Invoke(this, new CommStatusEventArgs(CommStatusType.RtuSuccess, "ModbusRTU 응답 성공"));
 
             return values;
         }

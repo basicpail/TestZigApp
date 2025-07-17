@@ -16,7 +16,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private readonly ModbusRTURequest _modbusRequest;
         private readonly RandomHoldingRegisterSource _randomHoldingRegisterSource;
 
-        private const int MaxResponseCount = 10;
+        private const int MaxResponseCount = 1;
 
         //public ObservableCollection<string> UDPResponseList { get; } = new ObservableCollection<string>();
         public ObservableCollection<ResponseItem> UDPRequestList { get; } = new();
@@ -40,6 +40,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
 
             _randomHoldingRegisterSource = randomHoldingRegisterSource;
             _randomHoldingRegisterSource.RandomDataList += OnRandomHoldingRegisterSource;
+            _randomHoldingRegisterSource.DispatchCommStatus += OnDispatchCommStatus;
 
         }
 
@@ -54,8 +55,22 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private int _udpPort;
 
         [ObservableProperty]
-        private int _udpTimeOut=1000;
+        private int _udpInterval = 1000;
 
+        [ObservableProperty]
+        private int _udpTimeOut = 30000;
+
+        [ObservableProperty]
+        private int _udpTimeOutCount = 0;
+
+        [ObservableProperty]
+        private int _udpErrorCount = 0;
+
+        [ObservableProperty]
+        private int _rtuTimeOutCount = 0;
+
+        [ObservableProperty]
+        private int _rtuErrorCount = 0;
 
         [ObservableProperty]
         private string _lastRequestHex;
@@ -79,13 +94,13 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private bool _isInfoBarOpen = true;
 
         [ObservableProperty]
-        private string _rtuInfoBarMessage = "ModbusRTU Waiting to connect";
+        private string _rtuInfoBarMessage = "ModbusRTU 연결 대기 중";
 
         [ObservableProperty]
         private InfoBarSeverity _rtuInfoBarSeverity = InfoBarSeverity.Informational;
 
         [ObservableProperty]
-        private string _udpInfoBarMessage = "ModbusUDP Waiting to connect";
+        private string _udpInfoBarMessage = "UDP 연결 대기 중";
 
         [ObservableProperty]
         private InfoBarSeverity _udpInfoBarSeverity = InfoBarSeverity.Informational;
@@ -109,6 +124,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 StopBits = StopBits,
             };
             await _modbusRequest.StartAsync(settings);
+            SetRTUReponseResult();
         }
         public async Task ModbusUDPConnect()
         {
@@ -120,12 +136,12 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                     Port = UdpPort
                 };
                 bool result = await _modbusUDPService.ConnectAsync(settings);
-                SetUDPConnectionResult(true);
+                
                 if (result)
                 {
                     try
                     {
-                        _modbusUDPService.StartSendingLoop(UdpTimeOut); // 연결 성공 시 주기적 전송 시작
+                        _modbusUDPService.StartSendingLoop(UdpInterval, UdpTimeOut); // 연결 성공 시 주기적 전송 시작
                     }
                     catch (Exception ex)
                     {
@@ -143,11 +159,9 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         {
             try
             {
-                bool result = await _modbusUDPService.DisconnectAsync();
-                UdpInfoBarMessage = result ? "ModbusUDP Waiting to connect" : "ModbusUDP Disconnection failed";
-                UdpInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
-                IsInfoBarOpen = true;
-                UdpRequestNum = 0;
+                //bool result = await _modbusUDPService.DisconnectAsync();
+                await _modbusUDPService.StopSendingLoopAsync();
+                UDPRequestList.Clear();
             }
             catch (Exception ex)
             {
@@ -160,22 +174,34 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             switch (e.StatusType)
             {
                 case CommStatusType.Success:
-                    UdpInfoBarMessage = "ModbusUDP Connected";
+                    UdpInfoBarMessage = e.Message;
                     UdpInfoBarSeverity = InfoBarSeverity.Success;
                     IsInfoBarOpen = true;
-                    SetUDPConnectionResult(true, e.Message);
                     break;
                 case CommStatusType.Warning:
+                    UdpTimeOutCount++;
                     UdpInfoBarMessage = e.Message;
                     UdpInfoBarSeverity = InfoBarSeverity.Warning;
                     IsInfoBarOpen = true;
                     break;
                 case CommStatusType.Error:
+                    UdpErrorCount++;
                     UdpInfoBarMessage = e.Message;
                     UdpInfoBarSeverity = InfoBarSeverity.Error;
                     IsInfoBarOpen = true;
                     break;
                 case CommStatusType.Info:
+                    UdpRequestNum = 0;
+                    UdpTimeOutCount = 0;
+                    UdpErrorCount = 0;
+                    UdpInfoBarMessage = e.Message;
+                    UdpInfoBarSeverity = InfoBarSeverity.Informational;
+                    IsInfoBarOpen = true;
+                    break;
+                case CommStatusType.RtuSuccess:
+                    RtuInfoBarMessage = e.Message;
+                    RtuInfoBarSeverity = InfoBarSeverity.Success;
+                    IsInfoBarOpen = true;
                     break;
             }
         }
@@ -205,10 +231,11 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             try
             {
                 bool result = await _modbusRTUService.DisconnectAsync();
-                RtuInfoBarMessage = result ? "ModbusRTU Waiting to connect" : "ModbusRTU Disconnection failed";
+                RtuInfoBarMessage = result ? "ModbusRTU 연결 종료, 대기 중" : "ModbusRTU 연결 종료 실패";
                 RtuInfoBarSeverity = result ? InfoBarSeverity.Informational : InfoBarSeverity.Error;
                 IsInfoBarOpen = true;
                 RtuResponseNum = 0;
+                RTUResponseList.Clear();
 
 
             }
@@ -220,10 +247,18 @@ namespace DegaussingTestZigApp.ViewModels.Pages
 
         public void SetRTUConnectionResult(bool success, string? message = null)
         {
-            RtuInfoBarMessage = success ? "ModbusRTU Connected" : (message ?? "ModbusRTU Connection failed");
+            RtuInfoBarMessage = success ? "ModbusRTU 연결 성공, 메시지 수신 대기 중" : (message ?? "ModbusRTU 연결 실패");
             RtuInfoBarSeverity = success ? InfoBarSeverity.Success : InfoBarSeverity.Error;
             IsInfoBarOpen = true;
         }
+
+        public void SetRTUReponseResult()
+        {
+            RtuInfoBarMessage = "ModbusRTU 응답 성공";
+            RtuInfoBarSeverity = InfoBarSeverity.Success;
+            IsInfoBarOpen = true;
+        }
+
 
         public void SetUDPConnectionResult(bool success, string? message = null)
         {

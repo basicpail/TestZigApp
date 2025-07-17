@@ -72,76 +72,66 @@
                                     Severity="{Binding ViewModel.UdpInfoBarSeverity}"
                                     IsOpen="{Binding ViewModel.IsInfoBarOpen}"
                                     IsClosable="False"
+                                    FontSize="20"
                                     Margin="0,0,0,10" />
 
-                                <!-- 테이블 헤더 -->
-                                <Border Background="#22111111"
-                                    Padding="10"
-                                    CornerRadius="3"
-                                    SnapsToDevicePixels="True"
-                                    BorderBrush="#22111111"
-                                    BorderThickness="0,0,0,1">
-
+                                <Border CornerRadius="6"
+                                    Background="#22111111"
+                                    Padding="20"
+                                    Margin="0,0,0,0"
+                                    Height="300">
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="2*" />
-                                            <ColumnDefinition Width="1*" />
-                                        </Grid.ColumnDefinitions>
-                                            <TextBlock Text="No"
-                                                Grid.Column="0"
-                                                FontWeight="SemiBold"
-                                                FontSize="14"
-                                                Foreground="#EEEEEE"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Margin="10,0,0,0"/>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
 
-                                             <TextBlock Text="응답 시간"
-                                                Grid.Column="1"
-                                                FontWeight="SemiBold"
-                                                FontSize="14"
-                                                Foreground="#EEEEEE"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Margin="10,0,0,0"/>
+                                        <!-- Error/Timeout 상태 표시 (Row 0) -->
+                                        <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Left"
+                                            Margin="0,0,0,10"
+                                            Grid.Row="0">
+                                            <!-- Error -->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <ui:SymbolIcon Symbol="Warning20" Foreground="Red" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
+                                                <TextBlock Text="Error"
+                                                   Foreground="Red"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,10,0"/>
+                                                <TextBlock Text="{Binding ViewModel.UdpErrorCount}"
+                                                   Foreground="Red"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,20,0"/>
+                                            </StackPanel>
 
-                                            <TextBlock Text="응답 데이터"
-                                               Grid.Column="2"
-                                               FontWeight="SemiBold"
-                                               FontSize="14"
-                                               Foreground="#EEEEEE"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,0,10,0"/>
+                                            <!-- Timeout -->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <ui:SymbolIcon Symbol="Warning20" Foreground="Gold" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
+                                                <TextBlock Text="Timeout"
+                                                   Foreground="Gold"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,10,0"/>
+                                                <TextBlock Text="{Binding ViewModel.UdpTimeOutCount}"
+                                                   Foreground="Gold"
+                                                   FontSize="20"
+                                                   FontWeight="Light" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- 중앙 수신값 (Row 1) -->
+                                        <TextBlock Text="{Binding ViewModel.UDPRequestList[0].Value}"
+                                           FontSize="80"
+                                           FontWeight="Bold"
+                                           Foreground="IndianRed"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Grid.Row="1" />
                                     </Grid>
                                 </Border>
 
-                                <!-- 데이터 리스트 -->
-                                <ItemsControl ItemsSource="{Binding ViewModel.UDPRequestList}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border CornerRadius="6" Padding="10" Margin="0,5" Background="#22111111">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="1*" />
-                                                        <ColumnDefinition Width="2*" />
-                                                        <ColumnDefinition Width="1*" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="0" FontSize="18" HorizontalAlignment="Center">
-                                                        <Run Text="{Binding ResponseNum}" />
-                                                    </TextBlock>
-                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="1" FontSize="18" HorizontalAlignment="Center">
-                                                        <Run Text="{Binding Timestamp}" />
-                                                    </TextBlock>
-                                                    <TextBlock   Foreground="IndianRed" FontWeight="Bold" Grid.Column="2" FontSize="18" HorizontalAlignment="Center">
-                                                        <Run Text="{Binding Value}" />
-                                                    </TextBlock>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
                             </StackPanel>
                         </ui:Card>
                     </Grid>
@@ -169,11 +159,70 @@
                                     Severity="{Binding ViewModel.RtuInfoBarSeverity}"
                                     IsOpen="{Binding ViewModel.IsInfoBarOpen}"
                                     IsClosable="False"
+                                    FontSize="20"
                                     Margin="0,0,0,10" />
 
 
+                                <Border CornerRadius="6"
+                                        Background="#22111111"
+                                        Padding="20"
+                                        Margin="0,0,0,0"
+                                        Height="300">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Error/Timeout 상태 표시 (Row 0) -->
+                                        <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Left"
+                                            Margin="0,0,0,10"
+                                            Grid.Row="0">
+                                            <!-- Error -->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <ui:SymbolIcon Symbol="Warning20" Foreground="Red" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
+                                                <TextBlock Text="Error"
+                                                   Foreground="Red"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,10,0"/>
+                                                <TextBlock Text="{Binding ViewModel.RtuErrorCount}"
+                                                   Foreground="Red"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,20,0"/>
+                                            </StackPanel>
+
+                                            <!-- Timeout -->
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <ui:SymbolIcon Symbol="Warning20" Foreground="Gold" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
+                                                <TextBlock Text="Timeout"
+                                                   Foreground="Gold"
+                                                   FontSize="20"
+                                                   FontWeight="Light"
+                                                   Margin="5,0,10,0"/>
+                                                <TextBlock Text="{Binding ViewModel.RtuTimeOutCount}"
+                                                   Foreground="Gold"
+                                                   FontSize="20"
+                                                   FontWeight="Light" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- 중앙 수신값 (Row 1) -->
+                                        <TextBlock Text="{Binding ViewModel.RTUResponseList[0].Value}"
+                                           FontSize="80"
+                                           FontWeight="Bold"
+                                           Foreground="IndianRed"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Grid.Row="1" />
+                                    </Grid>
+                                </Border>
+
+
                                 <!-- 테이블 헤더 -->
-                                <Border Background="#22111111"
+                                <!--<Border Background="#22111111"
                                     Padding="10"
                                     CornerRadius="3"
                                     SnapsToDevicePixels="True"
@@ -214,11 +263,11 @@
                                            HorizontalAlignment="Center"
                                            Margin="0,0,10,0"/>
                                     </Grid>
-                                </Border>
+                                </Border>-->
 
 
 
-                                <ItemsControl ItemsSource="{Binding ViewModel.RTUResponseList}">
+                                <!--<ItemsControl ItemsSource="{Binding ViewModel.RTUResponseList}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Border CornerRadius="6" Padding="10" Margin="0,5" Background="#22111111">
@@ -235,7 +284,7 @@
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                </ItemsControl>-->
                             </StackPanel>
                         </ui:Card>
                     </Grid>

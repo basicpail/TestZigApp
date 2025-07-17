@@ -9,17 +9,23 @@ namespace DegaussingTestZigApp.Helpers
     public enum CommStatusType
     {
         Success,
+        Info,
         Warning,
         Error,
-        Info
+        Timeout,
+        RtuSuccess,
+        RtuInfo,
+        RtuWarning,
+        RtuError,
+        RtuTimeout,
     }
 
     public class CommStatusEventArgs : EventArgs
     {
-        public CommStatusType StatusType { get; }
-        public string Message { get; }
+        public CommStatusType? StatusType { get; }
+        public string? Message { get; }
 
-        public CommStatusEventArgs(CommStatusType statusType, string message)
+        public CommStatusEventArgs(CommStatusType? statusType, string? message)
         {
             StatusType = statusType;
             Message = message;

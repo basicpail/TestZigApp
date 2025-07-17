@@ -1,10 +1,6 @@
 ﻿using DegaussingTestZigApp.Controls;
-using DegaussingTestZigApp.Interfaces;
 using DegaussingTestZigApp.ViewModels.Controls;
 using DegaussingTestZigApp.ViewModels.Pages;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Appearance;
@@ -17,7 +13,7 @@ namespace DegaussingTestZigApp.Views.Pages
         private readonly IContentDialogService _dialogService = new ContentDialogService();
         private readonly ModbusRTUSettingViewModel _modbusRTUSettingViewModel;
         private readonly ModbusRTUSettingControl _modbusRTUSettingControl;
-        
+
         private readonly ModbusUDPSettingViewModel _modbusUPDSettingViewModel;
         private readonly ModbusUDPSettingControl _modbusUDPSettingControl;
         public DashboardViewModel ViewModel { get; }
@@ -66,7 +62,7 @@ namespace DegaussingTestZigApp.Views.Pages
                 var settingVm = _modbusUDPSettingControl;
                 ViewModel.UdpAddress = settingVm.ViewModel.Address;
                 ViewModel.UdpPort = settingVm.ViewModel.Port;
-                await ViewModel.ModbusUDPConnect(); 
+                await ViewModel.ModbusUDPConnect();
             }
             else if (result == ContentDialogResult.Secondary)
             {
