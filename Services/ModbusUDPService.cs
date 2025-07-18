@@ -53,14 +53,20 @@ namespace DegaussingTestZigApp.Services
         {
             try
             {
+                // 먼저 송수신 루프를 중지
+                await StopSendingLoopAsync();
+                
                 _cts?.Cancel();
+                _cts?.Dispose();
+                _cts = null;
+                
                 IsConnected = false;
                 Log("[UDP-Client] Disconnected.");
                 return true;
             }
             catch (Exception ex)
             {
-                //throw ex;
+                Log($"[UDP-Client] Disconnect error: {ex.Message}");
                 return false;
             }
         }
@@ -78,6 +84,7 @@ namespace DegaussingTestZigApp.Services
             if (_loopCts == null || _sendLoopTask == null)
             {
                 Log("[UDP] 송수신 루프가 실행 중이 아닙니다.");
+                return;
             }
 
             try
@@ -85,7 +92,10 @@ namespace DegaussingTestZigApp.Services
                 Log("[UDP] 송수신 루프 종료 요청");
                 _loopCts?.Cancel();
 
-                await _sendLoopTask;
+                if (_sendLoopTask != null)
+                {
+                    await _sendLoopTask;
+                }
                 DispatchCommStatus?.Invoke(this, new CommStatusEventArgs(CommStatusType.Info, "UDP 메시지 전송 종료, 연결 대기 중"));
 
 
@@ -160,50 +170,58 @@ namespace DegaussingTestZigApp.Services
 
             try
             { 
-                using var udpClient = new UdpClient(0); // 0은 OS가 임의 포트를 지정함. 이렇게 하면 작업이 끝난 뒤 udpClient.Close() 및 Dispose()가 자동으로 호출된다.
-                udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                var dataToSend = GenerateRandomResponse();//0~200사이 값
-
-                await udpClient.SendAsync(dataToSend, dataToSend.Length, _udplEndPoint);
-                Log($"[UDP-Client] Sent: {BitConverter.ToString(dataToSend)}");
-
-                using var cts = new CancellationTokenSource(timeout); //TimeoutMs시간이 지나면 자동으로 취소 요청 발생, 사실상 Task.Delay(TimeoutMs)와 동일
-                var receiveTask = udpClient.ReceiveAsync(); //클라이언트이지만 서버의 응답을 받는다.
-                var timeoutTask = Task.Delay(timeout);
-
-                var completedTask = await Task.WhenAny(receiveTask, timeoutTask); //ReceiveAsync의 응답과 Timeout 시간 중 먼저 끝나는 작업을 기다린다.
-                if (completedTask == receiveTask) //timeout 전에 응답이 왔으면 정상
+                using (var udpClient = new UdpClient(0))
                 {
-                    try
+                    udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                    // udpClient.Client.ExclusiveAddressUse = false; // 추가
+
+                    var receiveTask = udpClient.ReceiveAsync(); //클라이언트이지만 서버의 응답을 받는다. 수신 준비 먼저..
+
+                    var dataToSend = GenerateRandomResponse();//0~200사이 값
+                    await udpClient.SendAsync(dataToSend, dataToSend.Length, _udplEndPoint);
+                    Log($"[UDP-Client] Sent: {BitConverter.ToString(dataToSend)}");
+
+                    // using var cts = new CancellationTokenSource(timeout); //TimeoutMs시간이 지나면 자동으로 취소 요청 발생, 사실상 Task.Delay(TimeoutMs)와 동일
+                    
+                    var timeoutTask = Task.Delay(timeout);
+                    var completedTask = await Task.WhenAny(receiveTask, timeoutTask); //ReceiveAsync의 응답과 Timeout 시간 중 먼저 끝나는 작업을 기다린다.
+
+                    if (completedTask == receiveTask) //timeout 전에 응답이 왔으면 정상
                     {
-                        var response = receiveTask.Result; //서버와의 연결이 끊기면 여기서 에러 발생.
-                        //var response = await receiveTask;
-                        // Log($"[UDP-Client] Received: {BitConverter.ToString(response.Buffer)}");
-                        UDPRequestSent?.Invoke(this, dataToSend);
-                    
-                        IsConnected = true;
-                        return new CommStatusEventArgs(CommStatusType.Success, "UDP 요청/응답 성공");
+                        try
+                        {
+                            //var response = receiveTask.Result; //서버와의 연결이 끊기면 여기서 에러 발생.
+                            var response = await receiveTask;
+                            // Log($"[UDP-Client] Received: {BitConverter.ToString(response.Buffer)}");
+                            UDPRequestSent?.Invoke(this, dataToSend);
+                        
+                            IsConnected = true;
+                            return new CommStatusEventArgs(CommStatusType.Success, "UDP 요청/응답 성공");
+                        }
+                        catch (SocketException ex) {
+                            Log($"[UDP] 소켓 예외 발생. 소켓을 재생성합니다: {ex.Message}");
+                            return new CommStatusEventArgs(CommStatusType.Error, "소켓 재연결 중");
+                        }
+                        catch (ObjectDisposedException ex) {
+                            Log($"[UDP] 소켓이 이미 해제됨: {ex.Message}");
+                            return new CommStatusEventArgs(CommStatusType.Error, "소켓이 이미 해제됨");
+                        }
                     }
-                    catch (SocketException ex) {
-                        Log($"[UDP] 소켓 예외 발생. 소켓을 재생성합니다: {ex.Message}");
-
-
-                        return new CommStatusEventArgs(CommStatusType.Error, "소켓 재연결 중");
+                    else //timeout상황
+                    {
+                        
+                        Log("[UDP-Client] Timeout waiting for response.");
+                        IsConnected = false;
+                        return new CommStatusEventArgs(CommStatusType.Timeout, "Timeout. 서버로부터의 응답이 기준 시간을 초과 했습니다.");
                     }
-                }
-                else //timeout상황
-                {
-                    
-                    Log("[UDP-Client] Timeout waiting for response.");
-                    IsConnected = false;
-                    return new CommStatusEventArgs(CommStatusType.Timeout, "Timeout. 서버로부터의 응답이 기준 시간을 초과 했습니다.");
                 }
             }
             catch (SocketException ex)
             {
                 Log($"[UDP-Client] Socket error: {ex.Message}");
                 IsConnected = false;
-                return new CommStatusEventArgs(CommStatusType.Error, ex.Message);
+                //return new CommStatusEventArgs(CommStatusType.Error, ex.Message);
+                return new CommStatusEventArgs(CommStatusType.Error, "연결이 끊겼습니다.");
                 //throw ex;
             }
             catch (Exception ex)
@@ -211,7 +229,8 @@ namespace DegaussingTestZigApp.Services
                 Log($"[UDP-Client] Communication error: {ex.Message}");
                 IsConnected = false;
                 //throw ex;
-                return new CommStatusEventArgs(CommStatusType.Error, ex.Message);
+                //return new CommStatusEventArgs(CommStatusType.Error, ex.Message);
+                return new CommStatusEventArgs(CommStatusType.Error, "연결이 끊겼습니다.");
             }
         }
 

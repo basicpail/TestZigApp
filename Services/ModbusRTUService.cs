@@ -57,7 +57,6 @@ namespace DegaussingTestZigApp.Services
                 };
                 _serialPort.Open();
 
-                var logger = new CustomModbusLogger();
                 // 1. 데이터 저장소 생성 및 초기화
                 var factory = new ModbusFactory();
                 var adapter = new SerialPortAdapter(_serialPort);

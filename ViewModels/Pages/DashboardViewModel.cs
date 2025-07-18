@@ -58,7 +58,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
         private int _udpInterval = 1000;
 
         [ObservableProperty]
-        private int _udpTimeOut = 30000;
+        private int _udpTimeOut = 60000;
 
         [ObservableProperty]
         private int _udpTimeOutCount = 0;
@@ -126,6 +126,23 @@ namespace DegaussingTestZigApp.ViewModels.Pages
             await _modbusRequest.StartAsync(settings);
             SetRTUReponseResult();
         }
+
+        [RelayCommand]
+        private void ResetUdpRequestNum()
+        {
+            UdpRequestNum = 0;
+            UdpTimeOutCount = 0;
+            UdpErrorCount = 0;
+        }
+
+        [RelayCommand]
+        private void ResetRtuResponseNum()
+        {
+            RtuResponseNum = 0;
+            RtuTimeOutCount = 0;
+            RtuErrorCount = 0;
+        }
+
         public async Task ModbusUDPConnect()
         {
             try
@@ -291,7 +308,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 
                 UDPRequestList.Insert(0, new ResponseItem
                 {
-                    ResponseNum = ++UdpRequestNum,
+                    ResponseNum = UdpRequestNum > 200 ? 0 : ++UdpRequestNum,
                     Timestamp = currentTime,
                     Value = decimalValues
                 });
@@ -308,7 +325,7 @@ namespace DegaussingTestZigApp.ViewModels.Pages
                 //RTUResponseList.Insert(0, currentTime + "      " + response[0]); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.
                 RTUResponseList.Insert(0, new ResponseItem
                 {
-                    ResponseNum = ++RtuResponseNum,
+                    ResponseNum = RtuResponseNum > 200 ? 0 : ++RtuResponseNum,
                     Timestamp = currentTime,
                     Value = response[0].ToString()
                 }); //값을 하나만 읽어서 첫번째 배열 요소만 가져온다.

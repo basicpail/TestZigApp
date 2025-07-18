@@ -66,6 +66,7 @@
                                     <TextBlock Text="이더넷 통신 모듈 테스트" FontSize="14" FontWeight="SemiBold" />
                                     <ui:Button Content="통신설정" Width="100" Height="30" Margin="20,0,0,0"
                                         Click="OpenModbusUdpSettingDialog" />
+                                    <Button Content="카운트 초기화" Command="{Binding ViewModel.ResetUdpRequestNumCommand}" Margin="15,0,10,0"/>
                                 </StackPanel>
 
                                 <ui:InfoBar Title="{Binding ViewModel.UdpInfoBarMessage}"
@@ -81,17 +82,12 @@
                                     Margin="0,0,0,0"
                                     Height="300">
                                     <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-
                                         <!-- Error/Timeout 상태 표시 (Row 0) -->
-                                        <StackPanel Orientation="Horizontal"
+                                        <!--<StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
                                             Margin="0,0,0,10"
                                             Grid.Row="0">
-                                            <!-- Error -->
+                                            --><!-- Error --><!--
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <ui:SymbolIcon Symbol="Warning20" Foreground="Red" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
                                                 <TextBlock Text="Error"
@@ -106,7 +102,7 @@
                                                    Margin="5,0,20,0"/>
                                             </StackPanel>
 
-                                            <!-- Timeout -->
+                                            --><!-- Timeout --><!--
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <ui:SymbolIcon Symbol="Warning20" Foreground="Gold" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
                                                 <TextBlock Text="Timeout"
@@ -119,10 +115,10 @@
                                                    FontSize="20"
                                                    FontWeight="Light" />
                                             </StackPanel>
-                                        </StackPanel>
+                                        </StackPanel>-->
 
                                         <!-- 중앙 수신값 (Row 1) -->
-                                        <TextBlock Text="{Binding ViewModel.UDPRequestList[0].Value}"
+                                        <TextBlock Text="{Binding ViewModel.UDPRequestList[0].ResponseNum}"
                                            FontSize="80"
                                            FontWeight="Bold"
                                            Foreground="IndianRed"
@@ -151,7 +147,7 @@
                                     <TextBlock Text="시리얼 통신 모듈 테스트" Foreground="White" FontSize="14" FontWeight="SemiBold"  Margin="0,5,0,0"/>
                                     <ui:Button Content="통신설정" Width="100" Height="30" Margin="20,0,0,0"
                                                Click="OpenModbusRtuSettingDialog" />
-                                    <Button Content="Request" Command="{Binding ViewModel.ModbusRTURequestCommand}" Margin="15,0,10,0"/>
+                                    <Button Content="카운트 초기화" Command="{Binding ViewModel.ResetRtuResponseNumCommand}" Margin="15,0,10,0"/>
                                 </StackPanel>
 
 
@@ -169,17 +165,12 @@
                                         Margin="0,0,0,0"
                                         Height="300">
                                     <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-
                                         <!-- Error/Timeout 상태 표시 (Row 0) -->
-                                        <StackPanel Orientation="Horizontal"
+                                        <!--<StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Left"
                                             Margin="0,0,0,10"
                                             Grid.Row="0">
-                                            <!-- Error -->
+                                            --><!-- Error --><!--
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <ui:SymbolIcon Symbol="Warning20" Foreground="Red" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
                                                 <TextBlock Text="Error"
@@ -194,7 +185,7 @@
                                                    Margin="5,0,20,0"/>
                                             </StackPanel>
 
-                                            <!-- Timeout -->
+                                            --><!-- Timeout --><!--
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <ui:SymbolIcon Symbol="Warning20" Foreground="Gold" FontSize="32" FontWeight="Bold" Margin="0,0,6,0" />
                                                 <TextBlock Text="Timeout"
@@ -207,16 +198,16 @@
                                                    FontSize="20"
                                                    FontWeight="Light" />
                                             </StackPanel>
-                                        </StackPanel>
+                                        </StackPanel>-->
 
                                         <!-- 중앙 수신값 (Row 1) -->
-                                        <TextBlock Text="{Binding ViewModel.RTUResponseList[0].Value}"
+                                        <TextBlock Text="{Binding ViewModel.RTUResponseList[0].ResponseNum}"
                                            FontSize="80"
                                            FontWeight="Bold"
                                            Foreground="IndianRed"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           Grid.Row="1" />
+                                           Grid.Row="1"/>
                                     </Grid>
                                 </Border>
 
